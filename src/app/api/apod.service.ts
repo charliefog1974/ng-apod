@@ -10,7 +10,7 @@ export class ApodService {
   constructor(private ngApodConfig: NgApodConfig) { }
 
   getApod(): string{
-    return this.ngApodConfig.key;
+    return 'Hello World';
   }
 
 }
