@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
-// import { ApodService } from '../api/apod.service';
+import { ApodService } from '../api/apod.service';
 
 import { Injectable } from '@angular/core';
 
 import { NgApodConfig } from '../../../config/ng-apod.config';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ApodService {
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class ApodService {
 
-  constructor(private ngApodConfig: NgApodConfig) { }
+//   constructor(private ngApodConfig: NgApodConfig) { }
 
-  getApod(): string{
-    return this.ngApodConfig.key;
-  }
+//   getApod(): string {
+//     return this.ngApodConfig.key;
+//   }
 
-}
+// }
 
 @Component({
   selector: 'app-apod',
@@ -29,8 +29,12 @@ export class ApodComponent implements OnInit {
   constructor(private apodService: ApodService) { }
 
   ngOnInit() {
-    console.log(this.apodService.getApod());
+    // console.log(this.apodService.getApod());
+    this.apodService.getApod().subscribe(
+      (response: any) => {
+        console.log(response);
+      }
+    );
   }
 
 }
-

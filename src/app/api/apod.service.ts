@@ -1,4 +1,12 @@
 import { Injectable } from '@angular/core';
+//Import HttpClient
+import { HttpClient } from '@angular/common/http';
+
+//Import Observable
+import { Observable } from 'rxjs';
+
+//Import Apod
+import { Apod } from '../models/apod';
 
 import { NgApodConfig } from '../../../config/ng-apod.config';
 
@@ -7,10 +15,36 @@ import { NgApodConfig } from '../../../config/ng-apod.config';
 })
 export class ApodService {
 
-  constructor(private ngApodConfig: NgApodConfig) { }
+  private url:string
 
-  getApod(): string{
-    return 'Hello World';
+  constructor(
+    private http: HttpClient,
+    private ngApodConfig: NgApodConfig
+  ) {
+    this.url=`https://api.nasa.gov/planetary/apod?api_key=${this.ngApodConfig.key}`;
+  }
+
+  //Return an Observable Apod model
+  getApod(): Observable<Apod>{
+    //Make a get request over HTTP
+    return this.http.get<Apod>(this.url);
   }
 
 }
+
+// import { Injectable } from '@angular/core';
+
+// import { NgApodConfig } from '../../../config/ng-apod.config';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class ApodService {
+
+//   constructor(private ngApodConfig: NgApodConfig) { }
+
+//   getApod(): string{
+//     return 'Hello World';
+//   }
+
+// }
